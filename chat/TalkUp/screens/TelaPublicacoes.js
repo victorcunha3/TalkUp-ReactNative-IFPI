@@ -73,7 +73,7 @@ const ListaPublicacao = ({ navigation }) => {
         })
       });
       const data = await response.json();
-      carregarPublicacoesUsuario(); // Atualizar a lista de publicações do usuário
+      carregarPublicacoesUsuario()//...
       setConteudo('');
       setVisibilidade('');
     } catch (error) {
