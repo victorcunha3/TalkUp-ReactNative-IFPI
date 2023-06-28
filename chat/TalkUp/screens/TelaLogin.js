@@ -69,9 +69,6 @@ const TelaLogin = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{uri: "https://cdn-icons-png.flaticon.com/128/590/590685.png"}}
-      />
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
