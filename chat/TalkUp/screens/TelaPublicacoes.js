@@ -1,177 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
-const ListaPublicacao = ({ navigation }) => {
-  const [publicacoes, setPublicacoes] = useState([]);
-  const [publicacoesUsuario, setPublicacoesUsuario] = useState([]);
-  const [perfilUsuario, setPerfilUsuario] = useState(null);
-  const [conteudo, setConteudo] = useState('');
-  const [visibilidade, setVisibilidade] = useState('');
+const ListaPublicacaoScreen = () => {
+  const [publications, setPublications] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    carregarPublicacoes();
-    carregarPerfilUsuario();
+    const fetchPublications = async () => {
+      try {
+        //const token = await AsyncStorage.getItem('access_token');
+        const response = await fetch(
+          'https://talkup.onrender.com/chat/lista-publicacao',
+          {
+            headers: {
+              // Adicione quaisquer cabeçalhos necessários aqui
+            },
+          }
+        );
+        const data = await response.json();
+        setPublications(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+    fetchPublications();
   }, []);
 
-  const carregarPublicacoes = async () => {
-    try {
-      const responsePublicas = await fetch('https://talkup.onrender.com/chat/lista-publicacao/');
-      const dataPublicas = await responsePublicas.json();
-      setPublicacoes(dataPublicas);
-    } catch (error) {
-      console.error('Ocorreu um erro ao carregar as publicações:', error);
-    }
+  const renderPublicationItem = ({ item }) => (
+    <View style={styles.publicationContainer}>
+      <Text style={styles.author}>Autor: {item.autor}</Text>
+      <Text style={styles.content}>Conteúdo: {item.conteudo}</Text>
+      <Text style={styles.date}>Data de Publicação: {item.data_publicacao}</Text>
+      {/* Renderizar outros detalhes da publicação, como curtidas e comentários */}
+    </View>
+  );
+
+  const navigateToProfile = () => {
+    navigation.navigate('PerfilUsuario');
   };
 
-  const carregarPublicacoesUsuario = async () => {
-    try {
-      const token = await AsyncStorage.getItem('access_token');
-      const responseUsuario = await fetch('https://talkup.onrender.com/chat/publicacao/', {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const dataUsuario = await responseUsuario.json();
-      setPublicacoesUsuario(dataUsuario);
-    } catch (error) {
-      console.error('Ocorreu um erro ao carregar as publicações do usuário:', error);
-    }
-  };
+  const navigateToUserPrivate = () =>{
+    navigation.navigate('SuasPublicacoes');
+  }
 
-  const carregarPerfilUsuario = async () => {
-    try {
-      const token = await AsyncStorage.getItem('access_token');
-      const responsePerfil = await fetch('https://talkup.onrender.com/chat/perfil/', {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const dataPerfil = await responsePerfil.json();
-      setPerfilUsuario(dataPerfil);
-    } catch (error) {
-      console.error('Ocorreu um erro ao carregar o perfil do usuário:', error);
-    }
-  };
-
-  const criarPublicacao = async () => {
-    try {
-      const token = await AsyncStorage.getItem('access_token');
-      const response = await fetch('https://talkup.onrender.com/chat/publicacao/', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          conteudo: conteudo,
-          visibilidade: visibilidade
-        })
-      });
-      const data = await response.json();
-      carregarPublicacoesUsuario()//...
-      setConteudo('');
-      setVisibilidade('');
-    } catch (error) {
-      console.error('Ocorreu um erro ao criar a publicação:', error);
-    }
-  };
-
-  const renderizarPublicacao = ({ item }) => {
-    return (
-      <View style={styles.publicacaoContainer}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.autor}>{item.autor}</Text>
-          <Text style={styles.data}>{item.data_publicacao}</Text>
-        </View>
-        <Text style={styles.conteudo}>{item.conteudo}</Text>
-        <View style={styles.footerContainer}>
-          <Text style={styles.comentarios}>{item.comentarios.length} Comentários</Text>
-          <Text style={styles.curtidas}>{item.curtidas.length} Curtidas</Text>
-        </View>
-      </View>
-    );
-  };
-
-  const TelaPublicacoes = () => {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={publicacoes}
-          renderItem={renderizarPublicacao}
-          keyExtractor={item => item.id.toString()}
-        />
-      </View>
-    );
-  };
-
-  const SuasPublicacoes = () => {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={publicacoesUsuario}
-          renderItem={renderizarPublicacao}
-          keyExtractor={item => item.id.toString()}
-        />
-      </View>
-    );
-  };
-
-  const PerfilUsuario = () => {
-    if (!perfilUsuario) {
-      return (
-        <View style={styles.container}>
-          <Text>Loading...</Text>
-        </View>
-      );
-    }
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.bio}>{perfilUsuario.bio}</Text>
-        <Text style={styles.dataNascimento}>{perfilUsuario.data_nascimento}</Text>
-      </View>
-    );
-  };
+  const navigateCriar = () =>{
+    navigation.navigate('CriarPublicacao');
+  }
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate(SuasPublicacoes)}
-        >
-          <Text style={styles.buttonText}>Suas Publicações</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate(PerfilUsuario)}
-        >
-          <Text style={styles.buttonText}>Seu Perfil</Text>
-        </TouchableOpacity>
-      </View>
-      <TelaPublicacoes />
-      <TextInput
-        style={styles.input}
-        placeholder="Conteúdo da publicação"
-        value={conteudo}
-        onChangeText={setConteudo}
+      <Text style={styles.title}>Lista de Publicações:</Text>
+      <FlatList
+        data={publications}
+        renderItem={renderPublicationItem}
+        keyExtractor={(item) => item.id.toString()}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Visibilidade (privado ou público)"
-        value={visibilidade}
-        onChangeText={setVisibilidade}
-      />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={criarPublicacao}
-      >
-        <Text style={styles.buttonText}>Criar Publicação</Text>
+      <TouchableOpacity style={styles.button} onPress={navigateToProfile}>
+        <FontAwesome name="user" size={24} color="white" />
+        <Text style={styles.buttonText}>Ver Perfil</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={navigateToUserPrivate}>
+        <FontAwesome name="file" size={24} color="white" />
+        <Text style={styles.buttonText}>Suas Publicações</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={navigateCriar}>
+        <FontAwesome name="plus" size={24} color="white" />
+        <Text style={styles.buttonText}>Criar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -180,79 +78,47 @@ const ListaPublicacao = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    backgroundColor: '#F5F5F5',
+    padding: 20,
+    backgroundColor: '#f5f5f5',
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
-  publicacaoContainer: {
-    backgroundColor: '#FFFFFF',
-    marginBottom: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#DDDDDD',
-    borderRadius: 6,
+  publicationContainer: {
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
   },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 5,
-  },
-  autor: {
+  author: {
     fontSize: 16,
     fontWeight: 'bold',
+    marginBottom: 8,
   },
-  data: {
-    fontSize: 12,
-    color: '#888888',
-  },
-  conteudo: {
+  content: {
     fontSize: 14,
-    marginBottom: 10,
+    marginBottom: 8,
   },
-  footerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  comentarios: {
+  date: {
     fontSize: 12,
     color: '#888888',
-  },
-  curtidas: {
-    fontSize: 12,
-    color: '#888888',
-  },
-  bio: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  dataNascimento: {
-    fontSize: 12,
-    color: '#888888',
-  },
-  input: {
-    marginBottom: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#DDDDDD',
-    borderRadius: 6,
   },
   button: {
-    backgroundColor: '#4287f5',
-    padding: 10,
-    borderRadius: 6,
+    flexDirection:'row',
     alignItems: 'center',
-    //flex: 1,
-    marginRight: 5,
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
   },
   buttonText: {
-    color: '#FFFFFF',
+    marginLeft: 8,
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },
 });
 
-export default ListaPublicacao;
+export default ListaPublicacaoScreen;

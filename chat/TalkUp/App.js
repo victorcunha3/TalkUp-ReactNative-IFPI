@@ -4,7 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TelaLogin from "./screens/TelaLogin";
 import TelaRegistro from "./screens/TelaRegistro";
 import ListaPublicacao from "./screens/TelaPublicacoes";
-import PerfilUsuario from "./screens/TelaPublicacoes";
+import PerfilScreen from "./screens/TelaPerfil";
+import ListaPublicacaoUser from './screens/TelaUserPrivate';
+import CriarPublicacaoScreen from './screens/CriarPublicacaoUser';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -42,13 +45,18 @@ const App = () => {
         />
         <Stack.Screen
           name="SuasPublicacoes"
-          component={ListaPublicacao}
+          component={ListaPublicacaoUser}
           options={{ title: 'Suas Publicações' }}
         />
         <Stack.Screen
           name="PerfilUsuario"
-          component={PerfilUsuario}
+          component={PerfilScreen}
           options={{ title: 'Perfil do Usuário' }}
+        />
+        <Stack.Screen
+          name="CriarPublicacao"
+          component={CriarPublicacaoScreen}
+          options={{ title: 'Crie Sua Publicacao' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

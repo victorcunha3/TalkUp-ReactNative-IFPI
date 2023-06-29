@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Text, ActivityIndicator, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 const TelaRegistro = () => {
   const [nomeUsuario, setNomeUsuario] = useState('');
@@ -67,6 +68,7 @@ const TelaRegistro = () => {
 
   return (
     <View style={styles.container}>
+      <FontAwesome name="user-plus" size={64} color="#007bff" style={styles.icon} />
       <Text style={styles.title}>Registro</Text>
       <TextInput
         style={styles.input}
@@ -109,6 +111,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
     paddingHorizontal: 30,
+  },
+  icon: {
+    marginBottom: 40,
   },
   title: {
     fontSize: 24,

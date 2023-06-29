@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Alert, StyleSheet, Text, ActivityIndicator, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 const TelaLogin = () => {
   const [nomeUsuario, setNomeUsuario] = useState('');
@@ -69,6 +70,7 @@ const TelaLogin = () => {
 
   return (
     <View style={styles.container}>
+      <FontAwesome name="user-circle" size={64} color="#007bff" style={styles.icon} />
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
@@ -106,6 +108,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     paddingHorizontal: 30,
   },
+  icon: {
+    marginBottom: 40,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -114,7 +119,7 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     width: "100%",
-    marginBottom: 20,
+    marginBottom:20,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 10,
