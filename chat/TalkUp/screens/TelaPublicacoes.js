@@ -35,6 +35,7 @@ const ListaPublicacaoScreen = () => {
       <Text style={styles.author}>Autor: {item.autor}</Text>
       <Text style={styles.content}>Conteúdo: {item.conteudo}</Text>
       <Text style={styles.date}>Data de Publicação: {item.data_publicacao}</Text>
+      <Text style={styles.date}>visibilidade: {item.visibilidade}</Text>
       {item.comentarios &&
         item.comentarios.map((comentario, index) => (
           <Text key={index} style={styles.comment}>

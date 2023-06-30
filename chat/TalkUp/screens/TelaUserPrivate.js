@@ -35,6 +35,7 @@ const ListaPublicacaoUser = () => {
       <Text style={styles.author}>Autor: {item.autor}</Text>
       <Text style={styles.content}>Conteúdo: {item.conteudo}</Text>
       <Text style={styles.date}>Data de Publicação: {item.data_publicacao}</Text>
+      <Text style={styles.date}>visibilidade: {item.visibilidade}</Text>
       {/* Renderizar outros detalhes da publicação, como curtidas e comentários */}
     </View>
   );
