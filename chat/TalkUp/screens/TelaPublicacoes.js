@@ -35,6 +35,11 @@ const ListaPublicacaoScreen = () => {
       <Text style={styles.author}>Autor: {item.autor}</Text>
       <Text style={styles.content}>Conteúdo: {item.conteudo}</Text>
       <Text style={styles.date}>Data de Publicação: {item.data_publicacao}</Text>
+      {item.comentarios && item.comentarios.map((comentario, index) => (
+        <Text key={index} style={styles.comment}>
+          Comentário: {comentario.conteudo}
+        </Text>
+      ))}
       {/* Renderizar outros detalhes da publicação, como curtidas e comentários */}
     </View>
   );
@@ -105,8 +110,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#888888',
   },
+  comment: {
+    fontSize: 12,
+    color: '#888888',
+    marginLeft: 16,
+  },
   button: {
-    flexDirection:'row',
+    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#007bff',
     borderRadius: 8,
