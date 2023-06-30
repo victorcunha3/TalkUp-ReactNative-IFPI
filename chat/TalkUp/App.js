@@ -7,7 +7,7 @@ import ListaPublicacao from "./screens/TelaPublicacoes";
 import PerfilScreen from "./screens/TelaPerfil";
 import ListaPublicacaoUser from './screens/TelaUserPrivate';
 import CriarPublicacaoScreen from './screens/CriarPublicacaoUser';
-
+import ComentarPublicacaoScreen from './screens/ComentarPublicacao';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +57,11 @@ const App = () => {
           name="CriarPublicacao"
           component={CriarPublicacaoScreen}
           options={{ title: 'Crie Sua Publicacao' }}
+        />
+        <Stack.Screen
+          name="ComentarPublicacao"
+          component={ComentarPublicacaoScreen}
+          options={{ title: 'Comente' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -35,12 +35,16 @@ const ListaPublicacaoScreen = () => {
       <Text style={styles.author}>Autor: {item.autor}</Text>
       <Text style={styles.content}>Conteúdo: {item.conteudo}</Text>
       <Text style={styles.date}>Data de Publicação: {item.data_publicacao}</Text>
-      {item.comentarios && item.comentarios.map((comentario, index) => (
-        <Text key={index} style={styles.comment}>
-          Comentário: {comentario.conteudo}
-        </Text>
-      ))}
-      {/* Renderizar outros detalhes da publicação, como curtidas e comentários */}
+      {item.comentarios &&
+        item.comentarios.map((comentario, index) => (
+          <Text key={index} style={styles.comment}>
+            Comentário: {comentario.conteudo}
+          </Text>
+        ))}
+      <Button
+        title="Comentar"
+        onPress={() => navigation.navigate('ComentarPublicacao', { id: item.id })}
+      />
     </View>
   );
 
