@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ComentarPublicacaoScreen = () => {
-  const [comentario, setComentario] = useState('');
+  const [conteudo, setConteudo] = useState('');
   const navigation = useNavigation();
   const route = useRoute();
   const { id } = route.params;
@@ -22,12 +22,12 @@ const ComentarPublicacaoScreen = () => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            comentario,
+            conteudo,
           }),
         }
       );
-      if (response.status === 200) {
-        navigation.navigate('ListaPublicacao');
+      if (response.status === 201) {
+        navigation.navigate('TelaPublicacoes');
         // Comentário criado com sucesso
         // Redirecionar de volta para a lista de publicações ou realizar alguma outra ação
       } else {
@@ -43,8 +43,8 @@ const ComentarPublicacaoScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Comentário"
-        value={comentario}
-        onChangeText={setComentario}
+        value={conteudo}
+        onChangeText={setConteudo}
       />
       <Button
         style={styles.button}

@@ -8,6 +8,7 @@ import PerfilScreen from "./screens/TelaPerfil";
 import ListaPublicacaoUser from './screens/TelaUserPrivate';
 import CriarPublicacaoScreen from './screens/CriarPublicacaoUser';
 import ComentarPublicacaoScreen from './screens/ComentarPublicacao';
+import VerComentariosScreen from './screens/VerComentarios';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +63,11 @@ const App = () => {
           name="ComentarPublicacao"
           component={ComentarPublicacaoScreen}
           options={{ title: 'Comente' }}
+        />
+        <Stack.Screen
+          name="VerComentarios"
+          component={VerComentariosScreen}
+          options={{ title: 'Ver Comentários' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -11,12 +11,11 @@ const ListaPublicacaoScreen = () => {
   useEffect(() => {
     const fetchPublications = async () => {
       try {
-        //const token = await AsyncStorage.getItem('access_token');
         const response = await fetch(
-          'https://talkup.onrender.com/chat/lista-publicacao',
+          'https://talkup.onrender.com/chat/lista-publicacao/',
           {
             headers: {
-              // Adicione quaisquer cabeçalhos necessários aqui
+              'Content-Type': 'application/json',
             },
           }
         );
@@ -35,7 +34,7 @@ const ListaPublicacaoScreen = () => {
       <Text style={styles.author}>Autor: {item.autor}</Text>
       <Text style={styles.content}>Conteúdo: {item.conteudo}</Text>
       <Text style={styles.date}>Data de Publicação: {item.data_publicacao}</Text>
-      <Text style={styles.date}>visibilidade: {item.visibilidade}</Text>
+      <Text style={styles.date}>Visibilidade: {item.visibilidade}</Text>
       {item.comentarios &&
         item.comentarios.map((comentario, index) => (
           <Text key={index} style={styles.comment}>
@@ -46,6 +45,10 @@ const ListaPublicacaoScreen = () => {
         title="Comentar"
         onPress={() => navigation.navigate('ComentarPublicacao', { id: item.id })}
       />
+      <Button
+        title="Ver Comentários"
+        onPress={() => navigation.navigate('VerComentarios', { id: item.id })}
+      />
     </View>
   );
 
@@ -53,13 +56,13 @@ const ListaPublicacaoScreen = () => {
     navigation.navigate('PerfilUsuario');
   };
 
-  const navigateToUserPrivate = () =>{
+  const navigateToUserPrivate = () => {
     navigation.navigate('SuasPublicacoes');
-  }
+  };
 
-  const navigateCriar = () =>{
+  const navigateCriar = () => {
     navigation.navigate('CriarPublicacao');
-  }
+  };
 
   return (
     <View style={styles.container}>
