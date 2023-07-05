@@ -41,10 +41,11 @@ const VerComentariosScreen = ({ route }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Comentários da Publicação {id}:</Text>
       <FlatList
-        data={comments}
-        renderItem={renderCommentItem}
-        keyExtractor={(item) => item?.id?.toString() || ''}
-      />
+      data={comments}
+      renderItem={renderCommentItem}
+      keyExtractor={(item) => item?.id?.toString() || ''}
+/>
+
     </View>
   );
 };

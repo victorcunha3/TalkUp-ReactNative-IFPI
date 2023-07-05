@@ -25,7 +25,7 @@ const ListaPublicacaoScreen = () => {
         console.error(error);
       }
     };
-    
+
     fetchPublications();
   }, []);
 
@@ -41,14 +41,18 @@ const ListaPublicacaoScreen = () => {
             Comentário: {comentario.conteudo}
           </Text>
         ))}
-      <Button
-        title="Comentar"
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate('ComentarPublicacao', { id: item.id })}
-      />
-      <Button
-        title="Ver Comentários"
+      >
+        <Text style={styles.buttonText}>Comentar</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate('VerComentarios', { id: item.id })}
-      />
+      >
+        <Text style={styles.buttonText}>Ver Comentários</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -98,21 +102,25 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign: 'center',
   },
   publicationContainer: {
     backgroundColor: '#ffffff',
     borderRadius: 8,
     padding: 16,
     marginBottom: 16,
+    elevation: 2,
   },
   author: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 8,
+    color: '#333333',
   },
   content: {
     fontSize: 14,
     marginBottom: 8,
+    color: '#555555',
   },
   date: {
     fontSize: 12,
@@ -128,8 +136,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#007bff',
     borderRadius: 8,
-    padding: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
     marginBottom: 16,
+    elevation: 2,
   },
   buttonText: {
     marginLeft: 8,
