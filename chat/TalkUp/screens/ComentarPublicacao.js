@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Alert, TouchableOpacity, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -46,11 +46,10 @@ const ComentarPublicacaoScreen = () => {
         value={conteudo}
         onChangeText={setConteudo}
       />
-      <Button
-        style={styles.button}
-        title="Comentar"
-        onPress={handleComentarPublicacao}
-      />
+      <TouchableOpacity style={styles.button} onPress={handleComentarPublicacao}>
+        <Text style = {styles.text}>Comentar</Text>
+
+      </TouchableOpacity>
     </View>
   );
 };
@@ -69,6 +68,16 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingHorizontal: 10,
   },
+  button: {
+    backgroundColor:'#56b870',
+    borderRadius:8,
+    paddingVertical:10,
+    alignItems:'center',
+  },
+  text: {
+    color:'#f5f5f5'
+  }
+  
 });
 
 export default ComentarPublicacaoScreen;
