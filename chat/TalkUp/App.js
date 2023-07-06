@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const headerOptions = {
     headerStyle: {
-      backgroundColor: '#4287f5',
+      backgroundColor: '#56b870',
     },
     headerTintColor: '#FFFFFF',
     headerTitleStyle: {
@@ -29,24 +29,24 @@ const App = () => {
   return (
     <NavigationContainer>
       <StatusBar
-        backgroundColor="#4287f5"
+        backgroundColor="#43a95e"
         barStyle="light-content"
       />
       <Stack.Navigator screenOptions={headerOptions}>
         <Stack.Screen
           name="TelaLogin"
           component={TelaLogin}
-          options={{ title: 'Login'}}
+          options={{ title: 'TalkUp'}}
         />
         <Stack.Screen
           name="TelaRegistro"
           component={TelaRegistro}
-          options={{ title: 'Registro'}}
+          options={{ title: 'TalkUp'}}
         />
         <Stack.Screen
           name="TelaPublicacoes"
           component={ListaPublicacao}
-          options={{ title: 'Publicações', headerShown: false }}
+          options={{ title: 'Post', headerShown: false }}
         />
         <Stack.Screen
           name="SuasPublicacoes"
@@ -56,17 +56,17 @@ const App = () => {
         <Stack.Screen
           name="PerfilUsuario"
           component={PerfilScreen}
-          options={{ title: 'Perfil do Usuário'}}
+          options={{ title: 'Perfil '}}
         />
         <Stack.Screen
           name="CriarPublicacao"
           component={CriarPublicacaoScreen}
-          options={{ title: 'Crie Sua Publicacao'}}
+          options={{ title: 'Criar'}}
         />
         <Stack.Screen
           name="ComentarPublicacao"
           component={ComentarPublicacaoScreen}
-          options={{ title: 'Comente'}}
+          options={{ title: 'Comentar'}}
         />
         <Stack.Screen
           name="VerComentarios"
