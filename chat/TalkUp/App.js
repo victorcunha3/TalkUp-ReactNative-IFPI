@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';  
-import TelaLogin from "./screens/TelaLogin";
-import TelaRegistro from "./screens/TelaRegistro";
-import ListaPublicacao from "./screens/TelaPublicacoes";
-import PerfilScreen from "./screens/TelaPerfil";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'react-native';
+
+import TelaLogin from './screens/TelaLogin';
+import TelaRegistro from './screens/TelaRegistro';
+import ListaPublicacao from './screens/TelaPublicacoes';
+import PerfilScreen from './screens/TelaPerfil';
 import ListaPublicacaoUser from './screens/TelaUserPrivate';
 import CriarPublicacaoScreen from './screens/CriarPublicacaoUser';
 import ComentarPublicacaoScreen from './screens/ComentarPublicacao';
@@ -26,48 +28,50 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={headerOptions}
-      >
+      <StatusBar
+        backgroundColor="#4287f5"
+        barStyle="light-content"
+      />
+      <Stack.Navigator screenOptions={headerOptions}>
         <Stack.Screen
           name="TelaLogin"
           component={TelaLogin}
-          options={{ title: 'Login' }}
+          options={{ title: 'Login'}}
         />
         <Stack.Screen
           name="TelaRegistro"
           component={TelaRegistro}
-          options={{ title: 'Registro' }}
+          options={{ title: 'Registro'}}
         />
         <Stack.Screen
           name="TelaPublicacoes"
           component={ListaPublicacao}
-          options={{ title: 'Publicações' }}
+          options={{ title: 'Publicações', headerShown: false }}
         />
         <Stack.Screen
           name="SuasPublicacoes"
           component={ListaPublicacaoUser}
-          options={{ title: 'Suas Publicações' }}
+          options={{ title: 'Suas Publicações'}}
         />
         <Stack.Screen
           name="PerfilUsuario"
           component={PerfilScreen}
-          options={{ title: 'Perfil do Usuário' }}
+          options={{ title: 'Perfil do Usuário'}}
         />
         <Stack.Screen
           name="CriarPublicacao"
           component={CriarPublicacaoScreen}
-          options={{ title: 'Crie Sua Publicacao' }}
+          options={{ title: 'Crie Sua Publicacao'}}
         />
         <Stack.Screen
           name="ComentarPublicacao"
           component={ComentarPublicacaoScreen}
-          options={{ title: 'Comente' }}
+          options={{ title: 'Comente'}}
         />
         <Stack.Screen
           name="VerComentarios"
           component={VerComentariosScreen}
-          options={{ title: 'Ver Comentários' }}
+          options={{ title: 'Ver Comentários'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

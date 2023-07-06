@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PerfilScreen = () => {
@@ -58,6 +58,11 @@ const PerfilScreen = () => {
     <View style={styles.container}>
       {profile ? (
         <View>
+          <Image
+            style={styles.avatar}
+            source={{ uri: profile.avatar }}
+          />
+          <Text style={styles.username}>{profile.username}</Text>
           <Text style={styles.bioText}>Bio: {profile.bio}</Text>
           <Text style={styles.birthDateText}>
             Data de Nascimento: {profile.data_nascimento}
@@ -108,7 +113,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f5f5f5' },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  username: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   bioText: {
     fontSize: 18,

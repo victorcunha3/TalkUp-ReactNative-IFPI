@@ -31,9 +31,9 @@ const VerComentariosScreen = ({ route }) => {
 
   const renderCommentItem = ({ item }) => (
     <View style={styles.commentContainer}>
-      <Text style={styles.author}>Autor: {item.autor}</Text>
+      <Text style={styles.author}>@{item.autor}</Text>
       <Text style={styles.content}>Conteúdo: {item.conteudo}</Text>
-      <Text style={styles.date}>Data de Publicação: {item.data_publicacao}</Text>
+      <Text style={styles.date}>Data de Publicação: {item.data_comentario}</Text>
     </View>
   );
 
