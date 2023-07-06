@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     marginHorizontal: 4,
-    backgroundColor: '#e9e9e9',
+    backgroundColor: '#f2f2f2',
     borderRadius: 8,
     paddingVertical: 12,
   },
@@ -103,13 +103,13 @@ const styles = StyleSheet.create({
     color: '#555555',
   },
   buttonSelected: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#56b870',
   },
   buttonTextSelected: {
     color: '#ffffff',
   },
   createButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#56b870',
     borderRadius: 8,
     paddingVertical: 12,
     marginBottom: 16,
