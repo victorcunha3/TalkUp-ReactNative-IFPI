@@ -113,7 +113,7 @@ const ListaPublicacaoScreen = () => {
         <TouchableOpacity style={styles.menuIcon} onPress={toggleSidebar}>
           <FontAwesome name={showSidebar ? 'times' : 'bars'} size={24} color="white" />
         </TouchableOpacity>
-        <Text style={styles.title}>Lista de Publicações:</Text>
+        <Text style={styles.title}>Feed </Text>
       </View>
 
       <ScrollView style={styles.contentContainer}>
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#3498db',
+    backgroundColor: '#56b870',
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#3498db',
+    backgroundColor: '#56b870',
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 24,
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     width: 200,
-    backgroundColor: '#3498db',
+    backgroundColor: '#43a95e',
     paddingTop: 50,
     paddingHorizontal: 10,
   },
